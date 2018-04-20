@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/UWPEmotions/.vs/UWPEmotions/v15
+/UWPEmotions/bin/x86/Debug
+/UWPEmotions/obj
