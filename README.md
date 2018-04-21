@@ -205,7 +205,7 @@ Finally, let's process the result by drawing a rectangle over the detected faces
        {
            FontSize = 30,
            Foreground = new SolidColorBrush(Colors.Yellow),
-           Text = $"{highestScoreEmotion.Key} ({highestScoreEmotion.Value * 100:0.##)}%)"
+           Text = $"{highestScoreEmotion.Key} ({highestScoreEmotion.Value * 100:0.##)}%"
        };
 
        Canvas.SetLeft(emotionText, face.FaceRectangle.Left);
