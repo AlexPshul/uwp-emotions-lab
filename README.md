@@ -64,8 +64,6 @@ Continue in the *MainPage.xaml.cs* code behind:
        await _mediaCapture.InitializeAsync(settings);
        CameraInput.Source = _mediaCapture;
        await _mediaCapture.StartPreviewAsync();
-
-       _mediaCapture.VideoDeviceController.TrySetPowerlineFrequency(PowerlineFrequency.FiftyHertz);
    }
    ```
      
