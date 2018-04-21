@@ -8,6 +8,14 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
+        <CaptureElement Name="CameraInput" Width="900" Height="900" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Canvas Name="EmotionsCanvas" Width="900" Height="900" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent"/>
+
+        <Button Name="StartButton" Content="START" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="40" Margin="10" Width="170" Grid.Row="1"/>
     </Grid>
 </Page>
