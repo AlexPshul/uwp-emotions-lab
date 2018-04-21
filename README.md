@@ -33,9 +33,9 @@ Now, you are going to create a camera preview to show on the screen.
        <Button Name="StartButton" Content="START" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="40" Margin="10" Width="170" Grid.Row="1"/>
    </Grid>
    ```
-   a. The *CaptureElement* will show you the camera feed.
-   b. The *Canvas* will be used to draw the rectangle and add the emotion text.
-   c. The *Button* will Start/Stop the detection process.
+   1. The *CaptureElement* will show you the camera feed.
+   2. The *Canvas* will be used to draw the rectangle and add the emotion text.
+   3. The *Button* will Start/Stop the detection process.
 
 ##### Note, we are going to reduce the size of the image we send to Face API to 900x900 pixels. So to avoid any calculations, the *CaptureElement* and the *Canvas* were also set to 900x900 pixels.
 
