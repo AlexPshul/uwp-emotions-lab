@@ -33,15 +33,15 @@ Now, you are going to create a camera preview to show on the screen.
        <Button Name="StartButton" Content="START" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="40" Margin="10" Width="170" Grid.Row="1"/>
    </Grid>
    ```
-   a. The *CaptureElement* will show you the camera feed.
-   b. The *Canvas* will be used to draw the rectangle and add the emotion text.
-   c. The *Button* will Start/Stop the detection process.
+   1. The *CaptureElement* will show you the camera feed.
+   2. The *Canvas* will be used to draw the rectangle and add the emotion text.
+   3. The *Button* will Start/Stop the detection process.
 
 ##### Note, we are going to reduce the size of the image we send to Face API to 900x900 pixels. So to avoid any calculations, the *CaptureElement* and the *Canvas* were also set to 900x900 pixels.
 
 Continue in the *MainPage.xaml.cs* code behind:
 
-3. Create the a private member of type *MediaCapture*.
+3. Create a private member of type *MediaCapture*.
    ```csharp
    private MediaCapture _mediaCapture;
    ```
@@ -56,19 +56,22 @@ Continue in the *MainPage.xaml.cs* code behind:
    ```
 5. Add the async keyword to the *OnLoaded* method and add the following code:
    ```csharp
-   _mediaCapture = new MediaCapture();
-   MediaCaptureInitializationSettings settings = new MediaCaptureInitializationSettings { StreamingCaptureMode = StreamingCaptureMode.Video };
+   private async void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+   {
+       _mediaCapture = new MediaCapture();
+       MediaCaptureInitializationSettings settings = new MediaCaptureInitializationSettings { StreamingCaptureMode = StreamingCaptureMode.Video };
 
-   await _mediaCapture.InitializeAsync(settings);
-   CameraInput.Source = _mediaCapture;
-   await _mediaCapture.StartPreviewAsync();
+       await _mediaCapture.InitializeAsync(settings);
+       CameraInput.Source = _mediaCapture;
+       await _mediaCapture.StartPreviewAsync();
+   }
    ```
      
 6. Add permission to the application to use the camera.
 To do that, find the *Package.appxmanifest* file in the Solution Explorer and open it.
 Go to the *Capabilities* tab, scroll down and select the *Webcam* option.
 
-7. Test your camera.
+7. Run the application to test your camera output.
 If your camera is "flickering", add the following line in the end of the *OnLoaded* method:
    ```csharp
    _mediaCapture.VideoDeviceController.TrySetPowerlineFrequency(PowerlineFrequency.FiftyHertz);
@@ -161,7 +164,7 @@ Set a breakpoint inside the detection while loop and see that you get a result f
 ## Process detected face
 Finally, let's process the result by drawing a rectangle over the detected faces and a text with detected emotion.
 
-1. Create two methods (*DrawFaceRectangle* and *DrawEmotionText*) and wire call them inside the previously created *ProcessFace* method:
+1. Create two methods (*DrawFaceRectangle* and *DrawEmotionText*) and call them inside the previously created *ProcessFace* method:
    ```csharp
    private void ProcessFace(Face face)
    {
@@ -177,7 +180,7 @@ Finally, let's process the result by drawing a rectangle over the detected faces
    {
    }
    ```
-2. Inside the *DrawFaceRectangle* method, create a *Rectangle* and place it over the detected face using the coordinates provided us by the API:
+2. Inside the *DrawFaceRectangle* method, create a *Rectangle* and place it over the detected face using the coordinates that are provided by the API:
    ```csharp
    private void DrawFaceRectangle(FaceRectangle faceRectangle)
    {
@@ -200,7 +203,7 @@ Finally, let's process the result by drawing a rectangle over the detected faces
    private void DrawEmotionText(Face face)
    {
        EmotionScores emotionScores = face.FaceAttributes.Emotion;
-       KeyValuePair<string, float> highestScoreEmotion = emotionScores.ToRankedList().OrderByDescending(pair => pair.Value).FirstOrDefault();
+       KeyValuePair<string, float> highestScoreEmotion = emotionScores.ToRankedList().FirstOrDefault();
        TextBlock emotionText = new TextBlock
        {
            FontSize = 30,
