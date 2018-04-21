@@ -38,7 +38,7 @@ namespace UWPEmotions
         private async void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
             _mediaCapture = new MediaCapture();
-            MediaCaptureInitializationSettings settings = new MediaCaptureInitializationSettings { StreamingCaptureMode = StreamingCaptureMode.Video,  };
+            MediaCaptureInitializationSettings settings = new MediaCaptureInitializationSettings { StreamingCaptureMode = StreamingCaptureMode.Video };
 
             await _mediaCapture.InitializeAsync(settings);
             CameraInput.Source = _mediaCapture;
@@ -90,7 +90,7 @@ namespace UWPEmotions
         private void DrawEmotionText(Face face)
         {
             EmotionScores emotionScores = face.FaceAttributes.Emotion;
-            KeyValuePair<string, float> highestScoreEmotion = emotionScores.ToRankedList().OrderByDescending(pair => pair.Value).FirstOrDefault();
+            KeyValuePair<string, float> highestScoreEmotion = emotionScores.ToRankedList().FirstOrDefault();
             TextBlock emotionText = new TextBlock
             {
                 FontSize = 30,
